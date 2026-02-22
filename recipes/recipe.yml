@@ -5,7 +5,16 @@ base-image: ghcr.io/fedora-pwa/fedora-cosmic
 image-version: 43 # This was the "required property" you were missing!
 
 modules:
+  - type: nvidia-driver
+    video-drivers: true
+    
   - type: rpm-ostree
+    install:
+      - nvidia-container-toolkit
+      - podman-compose
+      - nvtop # Great for watching your GPU work in real-time
+  - 
+    type: rpm-ostree
     install:
       - git
       - python3
