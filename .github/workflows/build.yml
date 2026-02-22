@@ -20,6 +20,6 @@ jobs:
       - name: Build Image
         uses: blue-build/github-action@v1
         with:
-          recipe: recipe.yml
+          recipe: recipes/recipe.yml
           cosign_private_key: ${{ secrets.SIGNING_SECRET }}
           registry_token: ${{ github.token }}
