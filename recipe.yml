@@ -1,0 +1,29 @@
+# recipe.yml
+name: my-ai-os
+description: A personalized Fedora 43 COSMIC AI OS
+base-image: ghcr.io/fedora-pwa/cosmic-atomic:43
+image-flavor: main
+
+modules:
+  - type: files
+    files:
+      - usr: /usr # Maps local files to the image
+
+  - type: rpm-ostree
+    install:
+      - git
+      - vim
+      - python3-pip
+      - nvidia-container-toolkit # If you have an NVIDIA GPU
+      - podman-compose
+
+  - type: script
+    scripts:
+      - install-ai.sh # Found in config/scripts/
+
+  - type: default-flatpaks
+    system:
+      - org.gnome.Terminal
+      - io.github.cosmic_utils.Terminal
+
+  - type: signing # Required for BlueBuild
