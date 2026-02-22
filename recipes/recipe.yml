@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: my-ai-os
-description: My custom Fedora 43 AI OS with COSMIC Desktop and Local AI
+description: Fedora 43 COSMIC with Local AI and NVIDIA Support
 base-image: ghcr.io/fedora-pwa/fedora-cosmic
 image-version: 43
 
@@ -8,7 +8,8 @@ modules:
   - type: akmods
     install:
       - nvidia
-    nvidia-driver: true
+    # We removed the nvidia-driver: true line because it's now redundant
+    # and causing a schema validation error in the latest v1 spec.
 
   - type: rpm-ostree
     install:
