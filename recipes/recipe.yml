@@ -1,29 +1,28 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: my-ai-os
-description: My custom Fedora 43 AI OS with COSMIC Desktop
+description: My custom Fedora 43 AI OS with COSMIC Desktop and Local AI
 base-image: ghcr.io/fedora-pwa/fedora-cosmic
-image-version: 43 # This was the "required property" you were missing!
+image-version: 43
 
 modules:
-  - type: nvidia-driver
-    video-drivers: true
-    
-  - type: rpm-ostree
+  - type: akmods
     install:
-      - nvidia-container-toolkit
-      - podman-compose
-      - nvtop # Great for watching your GPU work in real-time
-  - 
-    type: rpm-ostree
+      - nvidia
+    nvidia-driver: true
+
+  - type: rpm-ostree
     install:
       - git
       - python3
       - curl
       - micro
+      - nvidia-container-toolkit
+      - podman-compose
+      - nvtop
 
   - type: default-flatpaks
     notify: true
-    system: # The schema changed; we'll fix the indentation here
+    system:
       install:
         - org.gnome.Terminal
         - io.github.cosmic_utils.Terminal
